@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .checked {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Todo</h2>
+    <ul id="ul">
+    </ul>
+    <script>
+        const ul = document.getElementById('ul')
+        const list = [
+            { id: 1, txt: '这是第一个todo', checked: false },
+            { id: 2, txt: '这是第二个todo', checked: true },
+        ]
+        const renderList = () => {
+            ul.innerHTML = list.map(item => `
+            <li class="${item.checked ? 'checked' : ''}" data-id="${item.id}">
+            <input type="checkbox" ${item.checked ? 'checked' : ''}>
+            <span>${item.txt}</span>
+        </li>`
+            ).join('');
+        }
+        renderList()
+
+        ul.addEventListener('click', e => {
+            const li = e.target.closest('li')
+            if (!li) return
+            const id = Number(li.dataset.id)
+            const item = list.find(item => item.id === id)
+            if (!item) return
+            const checkbox = li.querySelector('input[type="checkbox"]')
+            if (!checkbox) return
+            if (e.target != checkbox) {
+                input.checked = !checkbox.checked
+            }
+
+            item.checked = checkbox.checked;
+            li.classList.toggle('checked')
+        })
+
+    </script>
+
+
+</body>
+
+</html>
